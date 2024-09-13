@@ -1,11 +1,13 @@
+"use client";
+
 import React from "react";
 import { FaExclamationCircle } from "react-icons/fa";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const AuthErrorPage = () => {
-  const router = useRouter();
-  const { error } = router.query;
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
 
   return (
     <section className="min-h-screen flex-grow">
@@ -20,7 +22,7 @@ const AuthErrorPage = () => {
             </h1>
             <p className="text-gray-500 text-xl mb-10">
               {error
-                ? error.toString()
+                ? decodeURIComponent(error)
                 : "An error occurred during authentication"}
             </p>
             <Link
