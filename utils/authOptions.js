@@ -18,35 +18,52 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    // inovked on successful authentication
+    // Invoked on successful authentication
     async signIn({ profile }) {
-      // connect to the database
-      await connectDB();
+      try {
+        // Connect to the database
+        await connectDB();
 
-      // Find the user in the database
-      const user = await User.findOne({ email: profile.email }).lean();
+        // Find the user in the database
+        let user = await User.findOne({ email: profile.email }).lean();
 
-      // If the user does not exist, create a new user
-      if (!user) {
-        const username = profile.name.slice(0, 20);
-        const newUser = await User.create({
-          email: profile.email,
-          username: username,
-          image: profile.picture,
-        });
+        // If the user does not exist, create a new user
+        if (!user) {
+          const username = profile.name.slice(0, 20);
+          user = await User.create({
+            email: profile.email,
+            username: username,
+            image: profile.picture,
+          });
+        }
+        return true; // Return true to indicate successful sign-in
+      } catch (error) {
+        console.error("Error during sign-in:", error);
+        return false; // Return false to indicate failure
       }
-      return true;
     },
-    // session call back function that modifies the session object
+    // Session callback function that modifies the session object
     async session({ session }) {
-      // Get the user from the database
-      const user = await User.findOne({ email: session.user.email }).lean();
+      try {
+        // Get the user from the database
+        const user = await User.findOne({ email: session.user.email }).lean();
 
-      // Add the user to the session
-      session.user.id = user._id.toString();
+        // Check if user exists before accessing _id
+        if (user) {
+          session.user.id = user._id.toString(); // Add user ID to session
+        } else {
+          console.warn(
+            "User not found in session callback:",
+            session.user.email
+          );
+        }
 
-      // Return the session
-      return session;
+        // Return the session
+        return session;
+      } catch (error) {
+        console.error("Error during session callback:", error);
+        return session; // Return the session even if there's an error
+      }
     },
   },
 };

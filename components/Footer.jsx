@@ -18,6 +18,16 @@ const Footer = () => {
             <li className="text">
               <Link href="/">Terms of Service</Link>
             </li>
+            <li className="text">|</li>
+            <li className="text">
+              <Link
+                href="https://www.linkedin.com/in/samiesmilz/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Built by @samiesmilz
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
