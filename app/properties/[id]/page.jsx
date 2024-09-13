@@ -19,9 +19,17 @@ const PropertyPage = async ({ params }) => {
     notFound();
   }
 
+  // Convert the property to a plain object
+  const plainProperty = {
+    ...property,
+    _id: property._id.toString(), // Convert _id to string
+    owner: property.owner ? property.owner.toString() : null, // Convert owner to string if it exists
+    // Add any other fields that need conversion here
+  };
+
   return (
     <>
-      <PropertyHeaderImage image={property.images[0]} />
+      <PropertyHeaderImage image={plainProperty.images[0]} />
       <section>
         <div className="container m-auto py-6 px-6">
           <Link
@@ -35,16 +43,16 @@ const PropertyPage = async ({ params }) => {
       <section className="bg-purple-50">
         <div className="container m-auto py-10 px-6">
           <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
-            <PropertyDetails property={property} />
+            <PropertyDetails property={plainProperty} />
             <aside className="space-y-4">
-              <BookmarkButton property={property} />
-              <ShareButtons property={property} />
-              <PropertyContactForm property={property} />
+              <BookmarkButton property={plainProperty} />
+              <ShareButtons property={plainProperty} />
+              <PropertyContactForm property={plainProperty} />
             </aside>
           </div>
         </div>
       </section>
-      <PropertyImages images={property.images} />
+      <PropertyImages images={plainProperty.images} />
     </>
   );
 };

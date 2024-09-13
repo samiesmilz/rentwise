@@ -10,18 +10,19 @@ const Footer = () => {
           <Image src={logo} alt="Logo" className="h-8 w-auto" />
         </div>
         <div className="flex flex-wrap justify-center md:justify-start mb-4 md:mb-0">
-          <ul className="flex space-x-4">
+          <ul className="flex space-x-4 text-sm text-purple-300">
             <li>
               <Link href="/properties">Properties</Link>
             </li>
+            <li className="text">|</li>
             <li className="text">
-              | <Link href="/">Terms of Service</Link>
+              <Link href="/">Terms of Service</Link>
             </li>
           </ul>
         </div>
         <div>
-          <p className="text text-white mt-2 md:mt-0">
-            &copy; {currentYear} JustCoHost. All rights reserved.
+          <p className=" text-sm text-purple-300 mt-2 md:mt-0">
+            &copy; {currentYear} Dream Rental. All rights reserved.
           </p>
         </div>
       </div>

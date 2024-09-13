@@ -10,7 +10,7 @@ import "photoswipe/dist/photoswipe.css";
 
 // App meta data
 export const metadata = {
-  title: "Just Co-Host",
+  title: "Dream Rental",
   keywords: ["rental, property, short-term-rentals, real estate"],
   description: "find the perfect rental property",
 };
