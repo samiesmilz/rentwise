@@ -16,3 +16,11 @@ export const getSessionUser = async () => {
     return null; // Return null on error
   }
 };
+
+export const ensureAuth = async () => {
+  const sessionUser = await getSessionUser();
+  if (!sessionUser) {
+    throw new Error("Authentication required");
+  }
+  return sessionUser;
+};
