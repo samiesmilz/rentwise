@@ -11,9 +11,11 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "cool-gradient":
+          "linear-gradient(135deg, #ecf8f8 0%, #9d4ed0 50%, #ecf8f8 100%)",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "-apple-system", "Roboto", "sans-serif"],
+        sans: ["Noto", "sans-serif"],
         mono: ["JetBrains Mono", "Roboto Mono"],
       },
       gridTemplateColumns: {
