@@ -19,7 +19,10 @@ const authOptions = {
   callbacks: {
     async signIn({ profile }) {
       try {
+        // Ensure the database connection is established
         await connectDB();
+
+        // Find or create user
         let user = await User.findOne({ email: profile.email }).lean();
         if (!user) {
           const username = profile.name.slice(0, 20);
@@ -31,12 +34,20 @@ const authOptions = {
         }
         return true;
       } catch (error) {
-        console.error("Error during sign-in:", error);
+        console.error("Error during sign-in:", {
+          message: error.message,
+          stack: error.stack,
+          profile,
+        });
         return false;
       }
     },
     async session({ session }) {
       try {
+        // Ensure the database connection is established
+        await connectDB();
+
+        // Find user and set session user ID
         const user = await User.findOne({ email: session.user.email }).lean();
         if (user) {
           session.user.id = user._id.toString();
@@ -48,8 +59,12 @@ const authOptions = {
         }
         return session;
       } catch (error) {
-        console.error("Error during session callback:", error);
-        return session;
+        console.error("Error during session callback:", {
+          message: error.message,
+          stack: error.stack,
+          session,
+        });
+        return session; // Return session anyway to avoid breaking authentication flow
       }
     },
   },

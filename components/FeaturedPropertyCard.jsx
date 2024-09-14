@@ -21,8 +21,9 @@ const FeaturedPropertyCard = ({ property }) => {
           <Image
             src={property.images[0]}
             alt={property.name}
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
           />
           <div className="absolute top-2 left-0 bg-black text-purple-50 px-4 py-1 shadow-md rounded-e-md text-sm">
             <span className="text-xs">Featured</span>
