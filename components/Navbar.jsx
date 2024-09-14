@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import logo from "@/assets/images/logo-white.png";
+import logo from "@/assets/images/logo.png";
 import profile from "@/assets/images/profile.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,7 +27,7 @@ const Navbar = () => {
     setAuthProviders();
   }, []);
   return (
-    <div className="bg-purple-500 border-b border-black-500">
+    <div className="bg-gradient-to-r from-black via-purple-900 to-black border-b border-black-500">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-20 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -61,9 +61,13 @@ const Navbar = () => {
 
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
             <Link className="flex flex-shrink-0 items-center" href="/">
-              <Image className="h-10 w-auto" src={logo} alt="Just Co Host" />
+              <Image
+                className="h-10 w-auto rounded-md"
+                src={logo}
+                alt="Dream Rental"
+              />
 
-              <span className="hidden md:block text-white text-2xl font-bold ml-2 hover:text-black">
+              <span className="hidden md:block text-white text-2xl font-bold ml-2 hover:text-purple-50 hover:bg-black p-2 rounded-md transition duration-300 ease-in-out">
                 Dream Rental.
               </span>
             </Link>
